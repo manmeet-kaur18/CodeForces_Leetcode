@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int countSetBits(int n) 
+    { 
+        unsigned int count = 0; 
+        while (n) { 
+            n &= (n - 1); 
+            count++; 
+        } 
+        return count; 
+    } 
+    
+    vector<int> countBits(int num) {
+        vector<int> v;
+        int t=num;
+        num=0;
+        while(num <=t){
+            v.push_back(countSetBits(num));
+            num++;
+        }
+        return v;
+    }
+};
