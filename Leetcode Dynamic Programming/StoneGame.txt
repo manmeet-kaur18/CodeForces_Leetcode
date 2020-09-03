@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool stone(int alex,int lee,int turn,vector<int> pile){
+        if(pile.size()==1){
+            if(turn == 0){
+                return (alex+pile[0]) > lee;
+            }
+            else{
+                return alex > (lee+ pile[0]);
+            }
+        }    
+        auto start = pile.begin() + 0; 
+        auto end = pile.begin() + pile.size()-2; 
+        vector<int> result1(pile.size()-1); 
+        copy(start, end, result1.begin());
+        
+        start = pile.begin() + 1; 
+        end = pile.begin()+pile.size()-1; 
+        vector<int> result2(pile.size()-1); 
+        copy(start, end, result2.begin());
+        
+        if( turn == 0){
+            if(stone(alex+pile[pile.size()-1],lee,1,result1) || stone(alex+pile[0],lee,1,result2)){
+                return true;
+            }
+        }
+        else{
+            if(stone(alex,lee+pile[pile.size()-1],0,result1) || stone(alex,lee+pile[0],0,result2)){
+                return true;
+            } 
+        }
+        return false;
+    }  
+    
+    bool stoneGame(vector<int>& piles) {
+        return stone(0,0,0,piles);
+    }
+};
