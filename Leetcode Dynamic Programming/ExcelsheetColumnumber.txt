@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int len = s.length();
+        int sum = 0;
+        if(len == 1){
+            sum = s[0] - 'A' + 1; 
+        }
+        else{       
+            for(int i=1;i<=len-1;i++){
+                sum+= pow(26,i);
+                cout<<"sum "<<sum<<" len "<<i<<endl;
+            }
+            cout<<sum<<endl;
+            int t = len-1;
+            for(int i=0 ; i < (len - 1) ; i++){
+                sum += (s[i] - 'A')*pow(26,t);
+                t--;
+            }
+            sum += s[len-1] - 'A' + 1;
+        }
+        return sum;
+    }
+};
